@@ -17,5 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('students',[StudentController::class, 'index']);
-Route::post('create',[StudentController::class, 'store']);
+Route::resource('students',StudentController::class);
+// Route::get('students',[StudentController::class, 'index']);
+// Route::get('display',[StudentController::class, 'show']);
+// Route::get('create',[StudentController::class, 'create']);
+// Route::post('create',[StudentController::class, 'store']);
+// Route::get('edit/{id}',[StudentController::class, 'edit']);
+// Route::post('update/{id}',[StudentController::class, 'update'])->name('update');
+// // // Route::resource('students','StudentController');
+Route::get('delete/{id}',[StudentController::class, 'destroy'])->name('delete');
+

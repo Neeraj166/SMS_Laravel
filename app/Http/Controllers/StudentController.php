@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
-
+use Symfony\Component\Console\Input\Input;
 class StudentController extends Controller
 {
     /**
@@ -14,8 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students=Student::all();
-        return view('students.index',compact('students'));
+    //     $students=Student::all();
+    //     return view('students.index',compact('students'));
     }
 
     /**
@@ -36,13 +36,14 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student= new Student;
-        // $request->all();
-        $student->name=request('name');
-        $student->roll=request('roll');
-        $student->address=request('address');
-        $student->faculty=request('faculty');
-        $student->status=request('status');
+        // $student= new Student;
+        $input=$request->all();
+        $student=Student::create($input);
+        // $student->name=request('name');
+        // $student->roll=request('roll');
+        // $student->address=request('address');
+        // $student->faculty=request('faculty');
+        // $student->status=request('status');
         // dd($student);
         $student->save();
         // Student::create($request);
@@ -54,9 +55,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $abc=Student::all();
+        return view('students.show',compact('abc'));
     }
 
     /**
@@ -65,9 +67,11 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
-        //
+        $student=Student::find ($id);
+        return view('students.edit',compact('student'));
+
     }
 
     /**
@@ -77,10 +81,16 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request ,  $id)
     {
-        //
-    }
+        // dd($id);
+        $input=$request->all();
+
+        $student=Student::find ($id);
+        $student->update($input);
+
+        
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -90,6 +100,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student=Student::find ($id);
+        $student->delete();
+
     }
 }
