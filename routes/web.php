@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -26,4 +27,6 @@ Route::resource('students',StudentController::class);
 // Route::post('update/{id}',[StudentController::class, 'update'])->name('update');
 // // // Route::resource('students','StudentController');
 Route::get('delete/{id}',[StudentController::class, 'destroy'])->name('delete');
+// Route::get('deletef/{id}',[FacultyController::class, 'destroy'])->name('deletef');
+Route::resource('faculty',FacultyController::class);
 

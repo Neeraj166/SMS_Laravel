@@ -7,6 +7,7 @@
     <title>List of students</title>
 </head>
 <body>
+<a class="btn btn-primary" href="{{ route('students.create') }}"> Add Students</a>
 <table border="1">
 <thead><th>Sn</th>
 <th>Name</th>

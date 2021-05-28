@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Faculties;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
-class StudentController extends Controller
+
+class FacultyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-    //     $students=Student::all();
-    //     return view('students.index',compact('students'));
-    return redirect('/students/show');
-    }
+        $abc=Faculties::all();
+        return view('faculties.showf',compact('abc'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        return view('faculties.createf');
     }
 
     /**
@@ -37,18 +35,10 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // $student= new Student;
-        $input=$request->all();
-        $student=Student::create($input);
-        // $student->name=request('name');
-        // $student->roll=request('roll');
-        // $student->address=request('address');
-        // $student->faculty=request('faculty');
-        // $student->status=request('status');
-        // dd($student);
-        $student->save();
-        // Student::create($request);
-        return redirect('/students/show');
+        $faculty= new Faculties();
+        $faculty->faculty=request('faculty');
+        $faculty->save();
+        return redirect('/faculty');
     }
 
     /**
@@ -59,8 +49,7 @@ class StudentController extends Controller
      */
     public function show()
     {
-        $abc=Student::all();
-        return view('students.show',compact('abc'));
+        
     }
 
     /**
@@ -69,11 +58,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit($fid)
     {
-        $student=Student::find ($id);
-        return view('students.edit',compact('student'));
-
+       $abc=Faculties::find($fid);
+       echo $abc;
     }
 
     /**
@@ -83,17 +71,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request ,  $id)
+    public function update(Request $request, $id)
     {
-        // dd($id);
-        $input=$request->all();
-
-        $student=Student::find ($id);
-        $student->update($input);
-        return redirect('/students/show');
-
-        
-        }
+        //
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -103,9 +84,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student=Student::find ($id);
+        $student=Faculties::find ($id);
         $student->delete();
-        return redirect('/students/show');
-
+        return redirect('/faculties/show');
     }
 }
